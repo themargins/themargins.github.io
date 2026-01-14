@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>An Example Essay — Ali Alamri</title>
+    <meta name="description" content="An example essay demonstrating the typography and layout of this site." />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+
+  <body>
+    <header class="site-header">
+      <nav class="nav container">
+        <a class="brand" href="/">Ali Alamri</a>
+        <div class="nav-links">
+          <a href="/writing/">Writing</a>
+          <a href="/art/">Art</a>
+          <a href="/cv/">CV</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container prose">
+      <article>
+        <header class="post-header">
+          <p class="post-kicker">Essay</p>
+          <h1 class="post-title">
+            On Attention, Craft, and Leaving Space
+          </h1>
+          <p class="post-meta">
+            January 3, 2026 · 6 min read
+          </p>
+        </header>
+
+        <p>
+          Most things worth making benefit from being left alone long enough to
+          reveal what they actually want to become. Attention, when applied too
+          early or too forcefully, has a way of flattening subtlety.
+        </p>
+
+        <p>
+          This is particularly true of creative work. The urge to optimize,
+          explain, brand, or polish too soon often produces something that is
+          technically correct and emotionally inert.
+        </p>
+
+        <h2>Constraint as a form of care</h2>
+
+        <p>
+          Limitation is often misunderstood as deprivation. In practice, it is
+          closer to an act of care. Choosing fewer tools, fewer colors, fewer
+          words is a way of saying: <em>this deserves to be seen clearly</em>.
+        </p>
+
+        <blockquote>
+          <p>
+            What is left unsaid often carries more weight than what is explained
+            exhaustively.
+          </p>
+        </blockquote>
+
+        <p>
+          In writing, this shows up as line length, spacing, and rhythm. A page
+          that breathes invites the reader to slow down. A page that shouts asks
+          only to be skimmed.
+        </p>
+
+        <h2>Designing for reading</h2>
+
+        <p>
+          Good reading experiences share a few quiet traits: generous margins,
+          consistent cadence, and a sense that nothing is trying too hard. The
+          best compliment a layout can receive is invisibility.
+        </p>
+
+        <p>
+          This site is an attempt to practice that restraint. It favors
+          longevity over novelty, clarity over cleverness, and presence over
+          scale.
+        </p>
+
+        <h2>Closing</h2>
+
+        <p>
+          If something here feels slower than you expect, that is intentional.
+          Some things are better encountered without urgency.
+        </p>
+
+        <footer class="post-footer">
+          <p>
+            <a href="/writing/">← All writing</a>
+          </p>
+        </footer>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p class="muted">© <span id="year"></span> Ali Alamri</p>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
