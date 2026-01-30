@@ -21,14 +21,14 @@
 }
 
 .post-title {
-  margin: 0;
+  margin: 10;
   font-size: clamp(36px, 5vw, 52px);
   line-height: 1.08;
   font-weight: 500;
 }
 
 .post-meta {
-  margin-top: 28px;
+  margin-top: 14px;
   font-size: var(--step--1);
   color: var(--muted);
 }
