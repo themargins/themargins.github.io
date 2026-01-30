@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>An Example Essay — Ali Alamri</title>
+    <meta name="description" content="First post, still dipping toes into HTML." />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+
+  <body>
+    <header class="site-header">
+      <nav class="nav container">
+        <a class="brand" href="/">Ali Alamri</a>
+        <div class="nav-links">
+          <a href="/writing/">Writing</a>
+          <a href="/art/">Art</a>
+          <a href="/cv/">CV</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container prose">
+      <article>
+        <header class="post-header">
+          <p class="post-kicker">Essay</p>
+          <h1 class="post-title">
+            On Contentedness and Complacency
+          </h1>
+          <p class="post-meta">
+            January 30, 2026 · XX min read
+          </p>
+        </header>
+
+        <p>
+          Text
+        </p>
+
+        <h2>H2 Subtitle Placeholder</h2>
+
+        <p>
+          Text: <em>italics? bold?</em>.
+        </p>
+
+        <blockquote>
+          <p>
+            Quote Placeholder
+          </p>
+        </blockquote>
+
+        <footer class="post-footer">
+          <p>
+            <a href="/writing/">← All writing</a>
+          </p>
+        </footer>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p class="muted">© <span id="year"></span> Ali Alamri</p>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
