@@ -22,6 +22,7 @@
 
 .post-title {
   margin: 0;
+  margin-bottom: 0.15em;
   font-size: clamp(36px, 5vw, 52px);
   line-height: 1.08;
   font-weight: 500;
