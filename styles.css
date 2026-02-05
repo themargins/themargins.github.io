@@ -3,7 +3,7 @@
 ========================= */
 
 .prose {
-  max-width: 68ch;
+  max-width: 69ch;
   margin: clamp(48px, 8vw, 96px) auto;
   font-family: var(--serif);
 }
@@ -64,4 +64,39 @@
 .post-footer {
   margin-top: 64px;
   font-size: var(--step--1);
+}
+
+.center-nav {
+  display: flex;
+  align-items: center;
+}
+
+.center-nav .brand {
+  margin-right: auto;
+  text-decoration: none;
+}
+
+.center-nav .brand:hover {
+  text-decoration: underline;
+}
+
+.center-nav .nav-links {
+  display: flex;
+  gap: 24px;
+}
+
+.center-nav .nav-links a {
+  text-decoration: none;
+}
+
+.center-nav .nav-links a:hover {
+  text-decoration: underline;
+}
+
+/* Footer alignment: place footer content on the bottom-right */
+.site-footer .footer-inner {
+  display: flex;
+  justify-content: flex-end;
+  padding: 24px clamp(24px, 4vw, 48px);
+  text-align: right;
 }
