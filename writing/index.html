@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing | The Margins</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .writing-list {
+            display: grid;
+            gap: 3em;
+            margin-top: 4em;
+        }
+
+        .writing-list a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .writing-list a:visited {
+            color: inherit;
+        }
+
+        .writing-list article {
+            padding: 2.5em;
+            background: rgba(0, 0, 0, 0.02);
+            border-radius: 6px;
+            border: 1px solid var(--hairline);
+            transition: transform 0.2s ease, background 0.2s ease;
+            cursor: pointer;
+        }
+
+        .writing-list article:hover {
+            transform: translateY(-2px);
+            background: rgba(0, 0, 0, 0.04);
+        }
+
+        .writing-list h2 {
+            margin: 0 0 0.4em 0;
+            font-size: clamp(22px, 3.5vw, 28px);
+            line-height: 1.3;
+            transition: text-decoration 0.2s ease;
+        }
+
+        .writing-list article:hover h2 {
+            text-decoration: underline;
+        }
+
+        .article-meta {
+            font-size: var(--step--2);
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.8em;
+        }
+
+        .writing-list p {
+            margin: 0;
+            color: var(--muted);
+            font-size: var(--step-0);
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <nav class="center-nav">
+        <a href="../" class="brand">The Margins</a>
+        <div class="nav-links">
+            <a href="../">Home</a>
+            <a href="./">Writing</a>
+        </div>
+    </nav>
+
+    <main class="prose">
+        <header class="post-header">
+            <div class="post-kicker">Writing</div>
+            <h1 class="post-title">Essays & Thoughts</h1>
+            <p class="post-meta">Exploring ideas on technology, philosophy, and the human condition</p>
+        </header>
+
+        <section class="writing-list">
+            <a href="contentedness_complacency.html">
+                <article>
+                    <h2>Contentedness vs. Complacency</h2>
+                    <div class="article-meta">Essay</div>
+                    <p>Exploring the thin line between being satisfied with your life and losing your drive.</p>
+                </article>
+            </a>
+
+            <a href="the-price-is-right.html">
+                <article>
+                    <h2>The Price is Right</h2>
+                    <div class="article-meta">Essay</div>
+                    <p>Thoughts on pricing, value, and what we're willing to pay for.</p>
+                </article>
+            </a>
+
+            <a href="example-post.html">
+                <article>
+                    <h2>Example Post</h2>
+                    <div class="article-meta">Essay</div>
+                    <p>An example post to demonstrate the structure and layout of article listings.</p>
+                </article>
+            </a>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <p>&copy; 2026 The Margins.</p>
+        </div>
+    </footer>
+</body>
+</html>

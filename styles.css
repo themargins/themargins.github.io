@@ -3,7 +3,7 @@
 ========================= */
 
 .prose {
-  max-width: 69ch;
+  max-width: 66ch;
   margin: clamp(48px, 8vw, 96px) auto;
   font-family: var(--serif);
 }
