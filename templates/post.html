@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>$title$ — A∀</title>
+    <meta name="description" content="$description$" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+
+  <body>
+    <header class="site-header">
+      <nav class="center-nav">
+        <a class="brand" href="/">The Margins</a>
+        <div class="nav-links">
+          <a href="/writing/">Writing</a>
+          <a href="/art/">Art</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container prose">
+      <article>
+        <header class="post-header">
+          <p class="post-kicker">$category$</p>
+          <h1 class="post-title">$title$</h1>
+          <p class="post-meta">$date$</p>
+        </header>
+
+        $body$
+
+        <footer class="post-footer">
+          <p>
+            <a href="/writing/">← All writing</a>
+          </p>
+        </footer>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p class="muted">© <span id="year"></span> Ali Alamri</p>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
