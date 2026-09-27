@@ -6,7 +6,7 @@ category: Essay
 ---
 
 I sit at the blink fitness seated leg curl machine, 
-in between sets of curling 100 and 110lbs, and the front of me hanging 
+in between sets of curling 100 and 110lbs, and in front of me hanging 
 from the ceiling is a small flat screen TV showing participants of the game 
 show "the price is right" salivating over a new sporty cobalt blue BMW, and 
 losing their mind over an all expenses covered vacation to Borneo, for one 
