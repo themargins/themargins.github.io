@@ -39,9 +39,23 @@ body {
 }
 
 .wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   max-width: 38rem;
   margin: 0 auto;
   padding: 0 1.5rem;
+}
+
+/* The margin rule: runs the full height of the page */
+.wrap::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0.75rem;
+  border-left: 1px solid var(--hairline);
 }
 
 a {
@@ -84,17 +98,8 @@ a:focus-visible {
 /* Main column, with the margin rule */
 
 main {
-  position: relative;
+  flex: 1;
   padding: 4rem 0 5rem;
-}
-
-main::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: -0.75rem;
-  border-left: 1px solid var(--hairline);
 }
 
 /* Prose */
@@ -132,7 +137,21 @@ main::before {
 
 .prose blockquote p { margin: 0; font-style: italic; }
 
-.prose .note { color: var(--muted); font-size: var(--step--1); }
+.lede {
+  margin: 0 0 2.5rem;
+  font-size: clamp(1.6rem, 4.5vw, 2.1rem);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.prose .note {
+  margin-top: 3.5rem;
+  color: var(--muted);
+  font-size: var(--step--1);
+  line-height: 1.55;
+}
 
 .back { margin-top: 4rem; font-size: var(--step--1); }
 
@@ -167,7 +186,7 @@ main::before {
 }
 
 @media (min-width: 76rem) {
-  main::before { left: -2rem; }
+  .wrap::before { left: -0.5rem; }
 
   .marginnote {
     float: right;
