@@ -4,7 +4,7 @@ description: How should one go about structuring their creative work?
 date: February 9, 2026
 category: Essay
 ---
-Most things worth making benefit from being left alone long enough to reveal what they actually want to become. Attention, when applied too early or too forcefully, has a way of flattening subtlety.
+Most things worth making benefit from being left alone long enough to reveal what they actually want to become. Attention, when applied too early or too forcefully, has a way of flattening.
 This is particularly true of creative work. The urge to optimize, explain, brand, or polish too soon often produces something that is technically correct and **emotionally inert**.
 
 ## Constraint as a form of care
