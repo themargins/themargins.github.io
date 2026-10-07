@@ -35,8 +35,13 @@ Inside a paragraph, write `<span class="marginnote">A side remark.</span>`. On w
    `2026-10-07-morning-light.txt`. A blank line starts a new paragraph.
 3. Run `make`.
 
-Use .jpg, .png, .gif or .webp. iPhone .heic photos need exporting as .jpg first.
-About 2000px on the long side is plenty; `make` warns about files over 1.5 MB.
+Use .jpg, .png, .gif or .webp. Photos straight from an iPhone (.heic) are fine:
+`make` turns each one into a .jpg of the same name, 2000px on the long side, with
+the GPS location removed. The .heic stays in the folder but is never committed.
+It uses the Mac's built-in `sips`; `pip3 install pillow pillow-heif` is optional.
+
+Other images are published as they are, so export them at about 2000px on the
+long side; `make` warns about files over 1.5 MB.
 
 ## Preview
 

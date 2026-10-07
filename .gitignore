@@ -2,3 +2,9 @@
 
 # Personal file sitting in the folder; keep it out of the public site
 /5213__0__LINE__20251214__20261212__7796829a-1ba3-456d-bd13-b870ec5ad7e4__2,0__2639614.pdf
+
+# Phone originals: only the converted .jpg (location removed) is published
+*.heic
+*.HEIC
+*.heif
+*.HEIF
