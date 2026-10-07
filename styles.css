@@ -209,3 +209,42 @@ main {
 .line-block {
   margin: 0 0 1.75em;
 }
+
+/* Gallery: one image per row, caption beneath */
+
+.gallery { margin-top: 1rem; }
+
+.plate { margin: 0 0 4rem; }
+
+.plate a { display: block; }
+
+.plate img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 85vh;
+  background: var(--hairline);
+}
+
+.plate figcaption {
+  margin-top: 0.8rem;
+  color: var(--muted);
+  font-size: var(--step--1);
+  line-height: 1.5;
+}
+
+.plate-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0 1rem;
+}
+
+.plate-title { color: var(--ink); font-style: italic; }
+
+.plate time { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+.plate figcaption p { margin: 0.4rem 0 0; }
+
+.prose .empty { color: var(--muted); }

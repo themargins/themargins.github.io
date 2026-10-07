@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
-"""Rebuild the essay list in index.html from the frontmatter of content/*.md.
+"""Rebuild the essay lists from the frontmatter of content/*.md.
+
+Fills the list between the <!-- essays:start --> / <!-- essays:end --> markers
+in index.html (home) and writing/index.html (archive).
 
 Each essay needs a title and a date like "February 9, 2026".
-Add `draft: true` to the frontmatter to keep an essay off the home page.
+Add `draft: true` to the frontmatter to keep an essay off the lists.
 """
 import html
 import re
@@ -11,6 +14,7 @@ from datetime import datetime
 from pathlib import Path
 
 START, END = "<!-- essays:start -->", "<!-- essays:end -->"
+PAGES = [Path("index.html"), Path("writing/index.html")]
 
 
 def frontmatter(path):
@@ -53,11 +57,11 @@ rows = "\n".join(
     for d, stem, title in items
 )
 
-page = Path("index.html").read_text(encoding="utf-8")
-if START not in page or END not in page:
-    sys.exit(f"index.html is missing the {START} / {END} markers")
-
-before, rest = page.split(START, 1)
-_, after = rest.split(END, 1)
-Path("index.html").write_text(f"{before}{START}\n{rows}\n          {END}{after}", encoding="utf-8")
-print(f"index.html: listed {len(items)} essays")
+for page_path in PAGES:
+    page = page_path.read_text(encoding="utf-8")
+    if START not in page or END not in page:
+        sys.exit(f"{page_path} is missing the {START} / {END} markers")
+    before, rest = page.split(START, 1)
+    _, after = rest.split(END, 1)
+    page_path.write_text(f"{before}{START}\n{rows}\n          {END}{after}", encoding="utf-8")
+    print(f"{page_path}: listed {len(items)} essays")

@@ -1,9 +1,10 @@
 SRC := $(wildcard content/*.md)
 OUT := $(patsubst content/%.md,writing/%.html,$(SRC))
 
-all: $(OUT) home
+all: $(OUT) home gallery
 
-writing/%.html: content/%.md templates/post.html
+# Always rebuilt (it's quick), so no page is left on an old template
+writing/%.html: content/%.md templates/post.html FORCE
 	@mkdir -p writing
 	pandoc -s $< --template=templates/post.html --wrap=none -o $@
 
@@ -11,10 +12,15 @@ writing/%.html: content/%.md templates/post.html
 home:
 	python3 build_index.py
 
+# Rebuild the Gallery from the images in art/images/
+gallery:
+	python3 build_gallery.py
+
 serve:
 	python3 -m http.server 8000
 
 clean:
 	rm -f $(OUT)
 
-.PHONY: all home serve clean
+.PHONY: all home gallery serve clean FORCE
+FORCE:

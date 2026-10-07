@@ -1,8 +1,8 @@
 # themargins.github.io
 
-Personal essays. Static site, no framework.
+Personal site. Static, no framework. Needs `pandoc`, `python3` and `make`.
 
-## Writing an essay
+## Writing a piece
 
 1. Add `content/your_title.md` with frontmatter:
 
@@ -11,15 +11,32 @@ Personal essays. Static site, no framework.
    title: Your Title
    description: One sentence.
    date: February 9, 2026
+   category: Essay
    ---
    ```
 
-2. Run `make`. Each `content/*.md` becomes `writing/*.html` through `templates/post.html`.
-3. Add a line for it to the list in `index.html`.
+   Add `draft: true` to keep it off the site's lists while you work on it.
+
+2. Run `make`. Each `content/*.md` becomes `writing/*.html`, and the lists on the
+   home page and on `/writing/` are rebuilt from the dates, newest first.
+
+For poems, start each line with `| ` to keep the line breaks.
 
 ## Margin notes
 
 Inside a paragraph, write `<span class="marginnote">A side remark.</span>`. On wide screens it sits in the margin; on narrow ones it drops below the paragraph.
+
+## Adding to the Gallery
+
+1. Drop an image into `art/images/`, named with the date and a title:
+   `2026-10-07-morning-light.jpg` shows as *Morning light*, Oct 7, 2026.
+   The date is optional; it sets the order, newest first.
+2. Optional caption: a text file with the same name,
+   `2026-10-07-morning-light.txt`. A blank line starts a new paragraph.
+3. Run `make`.
+
+Use .jpg, .png, .gif or .webp. iPhone .heic photos need exporting as .jpg first.
+About 2000px on the long side is plenty; `make` warns about files over 1.5 MB.
 
 ## Preview
 
