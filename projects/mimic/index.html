@@ -28,7 +28,75 @@
           <p class="post-meta">Ongoing · Started 2026 · Updated Oct 15, 2026</p>
         </header>
 
-<div class="todo"><p><strong>Hero video.</strong> 10–20 s split-screen loop: my arm and hand on one side, the UR3e and Mia Hand mirroring them on the other. Muted, so it can autoplay. Drop the clip in this folder and replace this box with <code>![What it shows](hero.mov){.loop}</code>. Fallback: a photo of me mid-gesture with the robot copying in the background.</p></div><p><strong>MIMIC</strong> stands for <em>Motion Imitation via Markerless Image Capture</em>. I move my arm and hand in front of a depth camera, and a robot arm with a dexterous hand does the same thing.</p><ul><li><strong>What:</strong> live teleoperation of a Universal Robots UR3e arm and a Prensilia Mia Hand, driven by my own arm and hand movements.</li><li><strong>How:</strong> an Intel RealSense D435 sees me in colour and depth. Software finds my arm and hand keypoints, lifts them into 3D, and retargets them onto the robot.</li><li><strong>Why:</strong> markerless teleoperation is a cheap way to collect human demonstrations for robot learning, and building it end to end teaches perception, kinematics and real robot control all at once.</li></ul><h2 id="why-markerless">Why markerless</h2><p>Robots learn a lot from watching people, but showing them usually means motion-capture suits, data gloves, or a second robot to puppet. Those are expensive, fiddly, and they change how you move. A single depth camera is cheap and asks nothing of the person in front of it: you just move. If that’s good enough to drive a real arm and hand, it’s good enough to record demonstrations at scale.</p><p>I’m a PhD student interested in embodied robotics, and I wanted to get my hands dirty connecting perception to a real machine, not just a simulator. Underneath it is a conviction I keep coming back to: we should build intelligent robots that are amazing and charming, and that actually help serve the world. A robot that waves back when you wave at it is a small, good start.</p><p><span class="tbd">Context to confirm: built as a side project during my visiting PhD exchange at Chalmers University of Technology in Gothenburg; home institution the University of Chicago.</span></p><h2 id="the-system">The system</h2><ul><li><strong>Arm:</strong> Universal Robots UR3e, a 6-DoF collaborative arm</li><li><strong>Hand:</strong> Prensilia Mia Hand as the end effector, with three motors: thumb, index, and the middle, ring and little fingers together</li><li><strong>Eyes:</strong> Intel RealSense D435 depth camera (RGB + depth)</li><li><strong>Brain:</strong> a MacBook running the pipeline</li></ul><p>The data flows one way: <strong>D435 → pose estimation → 3D lifting → retargeting → UR3e and Mia Hand.</strong></p><div class="todo"><p><strong>Setup photo.</strong> The whole rig: camera on its tripod, UR3e, Mia Hand, laptop. Labelled callouts help. A block diagram of the pipeline could sit next to it.</p></div><h2 id="how-it-works">How it works</h2><h3 id="capture">1. Capture</h3><p>The D435 streams aligned colour and depth frames, so every pixel I see in the image also has a distance.</p><div class="todo"><p><strong>Raw frame next to depth.</strong> One RGB frame beside the same frame as a depth colormap.</p></div><h3 id="pose-estimation">2. Pose estimation</h3><p>A pose model finds keypoints on my arm and hand in each colour frame. <span class="tbd">TBD: which model or library, e.g. MediaPipe.</span></p><div class="todo"><p><strong>Keypoint overlay.</strong> A short clip of the skeleton tracking my arm and hand.</p></div><h3 id="lifting-to-3d">3. Lifting to 3D</h3><p>Each 2D keypoint is paired with the depth at that pixel and projected into 3D with the camera’s intrinsics, giving a 3D skeleton of my arm and hand.</p><div class="todo"><p><strong>3D view.</strong> The point cloud or 3D keypoints in a viewer (RViz, Open3D or similar).</p></div><h3 id="retargeting">4. Retargeting</h3><p>My arm isn’t a UR3e and my hand isn’t a Mia Hand, so the motion has to be translated. The arm pose becomes joint or Cartesian targets for the UR3e. <span class="tbd">TBD: IK approach.</span> The finger pose is reduced to the Mia Hand’s three motors. <span class="tbd">TBD: how finger curl maps to each motor.</span></p><div class="todo"><p><strong>Four hand poses.</strong> Open, fist, pinch and point, each next to the Mia Hand’s version.</p></div><h3 id="control">5. Control</h3><p>Commands go to the UR3e over <span class="tbd">TBD: RTDE / ROS 2 / other</span> and to the Mia Hand over <span class="tbd">TBD: interface</span>.</p><h3 id="safety">6. Safety</h3><p><span class="tbd">TBD: workspace limits, speed limits, and the filtering or smoothing that keeps the arm from following every jitter.</span></p><h2 id="results">Results</h2><p><span class="tbd">TBD: latency, control rate, tracking accuracy, and the tasks it can do.</span></p><div class="todo"><p><strong>Task demo.</strong> Picking something up and placing it, waving, or handing an object to a person. A plot of commanded vs. actual joint angles, or a latency histogram, would back it up. A slowed-down clip shows the delay between me and the robot honestly.</p></div><h2 id="what-was-hard">What was hard</h2><p><span class="tbd">TBD. Likely suspects: depth noise, fingers hiding each other from the camera, the mismatch between a human arm and a robot’s, and jitter.</span></p><div class="todo"><p><strong>A failure clip.</strong> Tracking dropping out when fingers are hidden, or jitter before and after smoothing, side by side. Failures make the page more honest and more interesting.</p></div><h2 id="whats-next">What’s next</h2><p><span class="tbd">To confirm: recording demonstrations for imitation learning, a two-armed setup, force feedback.</span></p><div class="todo"><p><strong>Something charming.</strong> The robot waving hello, a high-five, a thumbs-up, or a round of rock-paper-scissors.</p></div><h2 id="stack-and-links">Stack and links</h2><p>UR3e, Mia Hand, RealSense D435, MacBook. <span class="tbd">TBD: languages and libraries.</span></p><p>Code: <span class="tbd">TBD: public repo link, or “available on request”.</span></p><h2 id="updates">Updates</h2><p><strong>Oct 15, 2026.</strong> Started this page.</p>
+<figure>
+<video src="mimic_20261015_235319.mp4" autoplay muted loop playsinline aria-label="My hand and the tracking (translation and rotation in 3D, as well as hand aperture)" poster="mimic_20261015_235319.poster.jpg" width="480" height="270" style="aspect-ratio: 480 / 270; width: min(100%, calc(85vh * 480 / 270))"><a href="mimic_20261015_235319.mp4">Watch the video</a></video>
+<figcaption>My hand and the tracking (translation and rotation in 3D, as well as hand aperture)</figcaption>
+</figure>
+<p><strong>MIMIC</strong> stands for <em>Motion Imitation via Markerless Image Capture</em>. I move my arm and hand in front of a depth camera, and a robot arm with a dexterous hand does the same thing.</p>
+<ul>
+<li><strong>What:</strong> live teleoperation of a Universal Robots UR3e arm and a Prensilia Mia Hand, driven by my own arm and hand movements.</li>
+<li><strong>How:</strong> an Intel RealSense D435 sees me in colour and depth. Software finds my arm and hand keypoints, lifts them into 3D, and retargets them onto the robot.</li>
+<li><strong>Why:</strong> markerless teleoperation is a cheap way to collect human demonstrations for robot learning, and building it end to end teaches perception, kinematics and real robot control all at once.</li>
+</ul>
+<h2 id="why-markerless">Why markerless</h2>
+<p>Robots learn a lot from watching people, but showing them usually means motion-capture suits, data gloves, or a second robot to puppet. Those are expensive, fiddly, and they change how you move. A single depth camera is cheap and asks nothing of the person in front of it: you just move. If that’s good enough to drive a real arm and hand, it’s good enough to record demonstrations at scale.</p>
+<p>I’m a PhD student interested in embodied robotics, and I wanted to get my hands dirty connecting perception to a real machine, not just a simulator. Underneath it is a conviction I keep coming back to: we should build intelligent robots that are magical, and that actually help serve the world. A robot that waves back when you wave at it is a small, good start.</p>
+<h2 id="the-system">The system</h2>
+<ul>
+<li><strong>Arm:</strong> Universal Robots UR3e, a 6-DoF collaborative arm</li>
+<li><strong>Hand:</strong> Prensilia Mia Hand as the end effector, with three motors: thumb, index, and the middle, ring and little fingers together</li>
+<li><strong>Eyes:</strong> Intel RealSense D435 depth camera (RGB + depth)</li>
+<li><strong>Brain:</strong> a MacBook running the pipeline</li>
+</ul>
+<p>The data flows one way: <strong>D435 → pose estimation → 3D lifting → retargeting → UR3e and Mia Hand.</strong></p>
+<div class="todo">
+<p><strong>Setup photo.</strong> The whole rig: camera on its tripod, UR3e, Mia Hand, laptop. Labelled callouts help. A block diagram of the pipeline could sit next to it.</p>
+</div>
+<h2 id="how-it-works">How it works</h2>
+<h3 id="capture">1. Capture</h3>
+<p>The D435 streams aligned colour and depth frames, so every pixel I see in the image also has a distance.</p>
+<div class="todo">
+<p><strong>Raw frame next to depth.</strong> One RGB frame beside the same frame as a depth colormap.</p>
+</div>
+<h3 id="pose-estimation">2. Pose estimation</h3>
+<p>A pose model finds keypoints on my arm and hand in each colour frame. <span class="tbd">TBD: which model or library, e.g. MediaPipe.</span></p>
+<div class="todo">
+<p><strong>Keypoint overlay.</strong> A short clip of the skeleton tracking my arm and hand.</p>
+</div>
+<h3 id="lifting-to-3d">3. Lifting to 3D</h3>
+<p>Each 2D keypoint is paired with the depth at that pixel and projected into 3D with the camera’s intrinsics, giving a 3D skeleton of my arm and hand.</p>
+<div class="todo">
+<p><strong>3D view.</strong> The point cloud or 3D keypoints in a viewer (RViz, Open3D or similar).</p>
+</div>
+<h3 id="retargeting">4. Retargeting</h3>
+<p>My arm isn’t a UR3e and my hand isn’t a Mia Hand, so the motion has to be translated. The arm pose becomes joint or Cartesian targets for the UR3e. <span class="tbd">TBD: IK approach.</span> The finger pose is reduced to the Mia Hand’s three motors. <span class="tbd">TBD: how finger curl maps to each motor.</span></p>
+<div class="todo">
+<p><strong>Four hand poses.</strong> Open, fist, pinch and point, each next to the Mia Hand’s version.</p>
+</div>
+<h3 id="control">5. Control</h3>
+<p>Commands go to the UR3e over <span class="tbd">TBD: RTDE / ROS 2 / other</span> and to the Mia Hand over <span class="tbd">TBD: interface</span>.</p>
+<h3 id="safety">6. Safety</h3>
+<p><span class="tbd">TBD: workspace limits, speed limits, and the filtering or smoothing that keeps the arm from following every jitter.</span></p>
+<h2 id="results">Results</h2>
+<p><span class="tbd">TBD: latency, control rate, tracking accuracy, and the tasks it can do.</span></p>
+<div class="todo">
+<p><strong>Task demo.</strong> Picking something up and placing it, waving, or handing an object to a person. A plot of commanded vs. actual joint angles, or a latency histogram, would back it up. A slowed-down clip shows the delay between me and the robot honestly.</p>
+</div>
+<h2 id="what-was-hard">What was hard</h2>
+<p><span class="tbd">TBD. Likely suspects: depth noise, fingers hiding each other from the camera, the mismatch between a human arm and a robot’s, and jitter.</span></p>
+<div class="todo">
+<p><strong>A failure clip.</strong> Tracking dropping out when fingers are hidden, or jitter before and after smoothing, side by side. Failures make the page more honest and more interesting.</p>
+</div>
+<h2 id="whats-next">What’s next</h2>
+<p><span class="tbd">To confirm: recording demonstrations for imitation learning, a two-armed setup, force feedback.</span></p>
+<div class="todo">
+<p><strong>Something charming.</strong> The robot waving hello, a high-five, a thumbs-up, or a round of rock-paper-scissors.</p>
+</div>
+<h2 id="stack-and-links">Stack and links</h2>
+<p>UR3e, Mia Hand, RealSense D435, MacBook. <span class="tbd">TBD: languages and libraries.</span></p>
+<p>Code: <span class="tbd">TBD: public repo link, or “available on request”.</span></p>
+<h2 id="updates">Updates</h2>
+<p><strong>Oct 15, 2026.</strong> Started this page.</p>
       </article>
       <p class="back"><a href="/projects/">All projects</a></p>
     </main>

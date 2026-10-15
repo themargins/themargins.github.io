@@ -4,12 +4,10 @@ description: A robot arm and hand that copy my own movements, watched through a 
 status: ongoing
 started: 2026
 updated: October 15, 2026
-draft: true
+draft: false
 ---
 
-::: todo
-**Hero video.** 10–20 s split-screen loop: my arm and hand on one side, the UR3e and Mia Hand mirroring them on the other. Muted, so it can autoplay. Drop the clip in this folder and replace this box with `![What it shows](hero.mov){.loop}`. Fallback: a photo of me mid-gesture with the robot copying in the background.
-:::
+![My hand and the tracking (translation and rotation in 3D, as well as hand aperture)](mimic_20261015_235319.mov){.loop}
 
 **MIMIC** stands for *Motion Imitation via Markerless Image Capture*. I move my arm and hand in front of a depth camera, and a robot arm with a dexterous hand does the same thing.
 
@@ -21,9 +19,7 @@ draft: true
 
 Robots learn a lot from watching people, but showing them usually means motion-capture suits, data gloves, or a second robot to puppet. Those are expensive, fiddly, and they change how you move. A single depth camera is cheap and asks nothing of the person in front of it: you just move. If that's good enough to drive a real arm and hand, it's good enough to record demonstrations at scale.
 
-I'm a PhD student interested in embodied robotics, and I wanted to get my hands dirty connecting perception to a real machine, not just a simulator. Underneath it is a conviction I keep coming back to: we should build intelligent robots that are amazing and charming, and that actually help serve the world. A robot that waves back when you wave at it is a small, good start.
-
-[Context to confirm: built as a side project during my visiting PhD exchange at Chalmers University of Technology in Gothenburg; home institution the University of Chicago.]{.tbd}
+I'm a PhD student interested in embodied robotics, and I wanted to get my hands dirty connecting perception to a real machine, not just a simulator. Underneath it is a conviction I keep coming back to: we should build intelligent robots that are magical, and that actually help serve the world. A robot that waves back when you wave at it is a small, good start.
 
 ## The system
 
