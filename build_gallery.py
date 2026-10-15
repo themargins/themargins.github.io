@@ -26,95 +26,10 @@ START, END = "<!-- gallery:start -->", "<!-- gallery:end -->"
 IMAGES = Path("art/images")
 PAGE = Path("art/index.html")
 WEB_TYPES = {".jpg", ".jpeg", ".png", ".gif", ".webp", ".avif"}
-PHONE_TYPES = {".heic", ".heif"}
-LONG_SIDE = 2000  # px, for converted photos
 BIG_FILE = 1_500_000  # bytes; warn above this
 
 
-# --- Converting phone photos -------------------------------------------------
-
-def strip_location(data):
-    """Remove GPS data from a JPEG's EXIF block and drop XMP, keeping the rest
-    (including orientation). Returns the cleaned bytes."""
-    if data[:2] != b"\xff\xd8":
-        return data
-    out = bytearray(data[:2])
-    i = 2
-    while i + 4 <= len(data) and data[i] == 0xFF:
-        marker = data[i + 1]
-        if marker == 0xDA:  # start of image data: copy the rest unchanged
-            break
-        seg_len = struct.unpack(">H", data[i + 2:i + 4])[0]
-        seg = bytearray(data[i:i + 2 + seg_len])
-        if marker == 0xE1 and seg[4:10] == b"Exif\0\0":
-            _clear_gps(seg, 10)
-        elif marker == 0xE1 and b"ns.adobe.com/xap" in seg[:40]:
-            i += 2 + seg_len
-            continue  # drop XMP, which can repeat the location
-        out += seg
-        i += 2 + seg_len
-    out += data[i:]
-    return bytes(out)
-
-
-def _clear_gps(seg, t):
-    """Zero the GPS IFD (entries and their values) inside an Exif segment;
-    `t` is where the TIFF header starts."""
-    e = "<" if seg[t:t + 2] == b"II" else ">"
-    u16 = lambda o: struct.unpack_from(e + "H", seg, t + o)[0]
-    u32 = lambda o: struct.unpack_from(e + "I", seg, t + o)[0]
-    sizes = {1: 1, 2: 1, 3: 2, 4: 4, 5: 8, 6: 1, 7: 1, 8: 2, 9: 4, 10: 8, 11: 4, 12: 8}
-    ifd0 = u32(4)
-    for k in range(u16(ifd0)):
-        entry = ifd0 + 2 + 12 * k
-        if u16(entry) != 0x8825:  # GPSInfo pointer
-            continue
-        gps = u32(entry + 8)
-        count = u16(gps)
-        for j in range(count):
-            g = gps + 2 + 12 * j
-            size = sizes.get(u16(g + 2), 1) * u32(g + 4)
-            if size > 4:
-                off = u32(g + 8)
-                seg[t + off:t + off + size] = bytes(size)
-        seg[t + gps:t + gps + 2 + 12 * count] = bytes(2 + 12 * count)
-
-
-def convert_phone_photo(src):
-    """Make src.jpg next to a .heic, unless an up-to-date one is already there."""
-    dst = src.with_suffix(".jpg")
-    if dst.exists() and dst.stat().st_mtime >= src.stat().st_mtime:
-        return
-    try:
-        from PIL import Image, ImageOps
-        import pillow_heif
-        pillow_heif.register_heif_opener()
-        with Image.open(src) as im:
-            im = ImageOps.exif_transpose(im).convert("RGB")
-            im.thumbnail((LONG_SIDE, LONG_SIDE))
-            im.save(dst, "JPEG", quality=85, optimize=True, progressive=True)  # no EXIF kept
-    except ImportError:
-        if shutil.which("sips"):  # built into every Mac
-            cmd = ["sips", "-s", "format", "jpeg", "-s", "formatOptions", "85",
-                   "-Z", str(LONG_SIDE), str(src), "--out", str(dst)]
-        elif shutil.which("magick"):
-            cmd = ["magick", str(src), "-auto-orient", "-resize", f"{LONG_SIDE}x{LONG_SIDE}>",
-                   "-strip", "-quality", "85", str(dst)]
-        else:
-            print(f"can't convert {src.name}: no converter found; "
-                  "run `pip3 install pillow pillow-heif`", file=sys.stderr)
-            return
-        result = subprocess.run(cmd, capture_output=True, text=True)
-        if result.returncode != 0 or not dst.exists():
-            print(f"couldn't convert {src.name}: {result.stderr.strip()}", file=sys.stderr)
-            return
-        try:
-            dst.write_bytes(strip_location(dst.read_bytes()))
-        except Exception as err:
-            dst.unlink(missing_ok=True)  # never publish a photo that may carry a location
-            print(f"couldn't remove location data from {src.name} ({err}); skipped it", file=sys.stderr)
-            return
-    print(f"converted {src.name} -> {dst.name}")
+from media import convert_phone_photo, PHONE_TYPES  # shared with build_projects.py
 
 
 # --- Reading image sizes -------------------------------------------------------

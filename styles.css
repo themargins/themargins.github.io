@@ -210,6 +210,88 @@ main {
   margin: 0 0 1.75em;
 }
 
+/* Photos, videos and embeds inside a page (the Gallery keeps its own rules) */
+
+:where(.prose) figure { margin: 2.5rem 0; }
+
+:where(.prose) img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 85vh;
+}
+
+:where(.prose) video {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  background: transparent;
+}
+
+:where(.prose) .embed {
+  display: block;
+  aspect-ratio: 16 / 9;
+  background: var(--hairline);
+}
+
+:where(.prose) .embed iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+:where(.prose) figcaption {
+  margin-top: 0.8rem;
+  color: var(--muted);
+  font-size: var(--step--1);
+  line-height: 1.5;
+}
+
+/* Projects */
+
+.post-dek {
+  margin: 0.6rem 0 0.8rem;
+  color: var(--muted);
+  font-size: clamp(1.2rem, 3.2vw, 1.45rem);
+  line-height: 1.35;
+  text-wrap: pretty;
+}
+
+.index-meta {
+  color: var(--muted);
+  font-size: var(--step--1);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.index .index-desc {
+  flex-basis: 100%;
+  margin: 0.1rem 0 0;
+  color: var(--muted);
+  font-size: var(--step--1);
+  line-height: 1.45;
+}
+
+.projects li { padding: 0.8rem 0; }
+
+/* Drafting aids: ::: todo boxes and [text]{.tbd}, for things still to fill in */
+
+.todo {
+  margin: 2rem 0;
+  padding: 0.9rem 1.1rem;
+  border: 1px dashed var(--muted);
+  color: var(--muted);
+  font-size: var(--step--1);
+  line-height: 1.5;
+}
+
+.prose .todo p { margin: 0; }
+
+.tbd { color: var(--muted); font-style: italic; }
+
 /* Gallery: one image per row, caption beneath */
 
 .gallery { margin-top: 1rem; }

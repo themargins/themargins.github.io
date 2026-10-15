@@ -1,7 +1,7 @@
 SRC := $(wildcard content/*.md)
 OUT := $(patsubst content/%.md,writing/%.html,$(SRC))
 
-all: $(OUT) home gallery
+all: $(OUT) home gallery projects
 
 # Always rebuilt (it's quick), so no page is left on an old template
 writing/%.html: content/%.md templates/post.html FORCE
@@ -16,11 +16,15 @@ home:
 gallery:
 	python3 build_gallery.py
 
+# Build each projects/<name>/index.md, convert its photos and videos, rebuild /projects/
+projects:
+	python3 build_projects.py
+
 serve:
 	python3 -m http.server 8000
 
 clean:
 	rm -f $(OUT)
 
-.PHONY: all home gallery serve clean FORCE
+.PHONY: all home gallery projects serve clean FORCE
 FORCE:

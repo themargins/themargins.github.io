@@ -8,3 +8,11 @@
 *.HEIC
 *.heif
 *.HEIF
+
+# Phone videos: only the converted .mp4 (metadata removed) is published
+*.mov
+*.MOV
+*.m4v
+*.M4V
+*.part.mp4
+__pycache__/
