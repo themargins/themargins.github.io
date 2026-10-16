@@ -11,7 +11,8 @@ music.txt  the songs, newest at the top:
 The first time a song appears, `make` looks it up in Apple's public music
 catalogue for its cover, year and 30-second preview, saves the cover in
 music/covers/ and remembers the rest in music/songs.json, so later builds work
-offline. Songs link to Apple Music, or to the link after a | if you add one.
+offline. Songs link to Apple Music, or to the link after a | if you add one;
+with a Spotify link, the cover comes from Spotify (the exact version you liked).
 
 Wrong song? In music/songs.json, add "recheck": true to its entry (or delete the
 entry) to look it up again, or put your own square image at the cover path.
@@ -148,12 +149,24 @@ def render(s, with_note):
             elif norm(found["matched"]) != norm(key):
                 print(f"'{key}' matched '{found['matched']}'", file=sys.stderr)
             info = cache[key] = found
-    # Download the cover when it's missing, or when the match changed since it was saved
-    if info.get("art") and (not cover.exists() or info.get("cover_from") != info["art"]):
-        data = fetch(info["art"])
+    # With a Spotify link, use Spotify's cover: it's exactly the version you liked
+    if "open.spotify.com/" in s["link"] and info.get("spotify_for") != s["link"]:
+        raw = fetch("https://open.spotify.com/oembed?url=" + urllib.parse.quote(s["link"], safe=""))
+        try:
+            thumb = json.loads(raw).get("thumbnail_url", "") if raw else ""
+        except ValueError:
+            thumb = ""
+        if thumb:
+            info["spotify_art"], info["spotify_for"] = thumb, s["link"]
+            cache[key] = info
+    art_url = info.get("spotify_art") or info.get("art")
+    # Download the cover when it's missing, or when its source changed since it was saved
+    if art_url and (not cover.exists() or info.get("cover_from") != art_url):
+        data = fetch(art_url)
         if data and data[:2] == b"\xff\xd8":
             cover.write_bytes(data)
-            info["cover_from"] = info["art"]
+            info["cover_from"] = art_url
+            cache[key] = info
             print(f"saved cover {cover}")
 
     title, artist = html.escape(s["song"]), html.escape(s["artist"])
