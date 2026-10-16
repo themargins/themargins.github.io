@@ -1,0 +1,20 @@
+# Your top 10, on the home page under "On repeat": first song is number 1.
+# Only the first ten are shown, in two columns of five.
+#
+#     Artist — Song
+#         An optional note on the next line, indented: why it's here.
+#     Artist — Song | https://open.spotify.com/track/...   (optional: where it links)
+#
+# Run `make`: each song's cover, year and 30-second preview are looked up the
+# first time. Lines starting with # are ignored.
+
+America — Tin Man | https://open.spotify.com/track/4uTTd2SlalZoG0zVgI63kH
+Jarabe De Palo — Bonito | https://open.spotify.com/track/6adD0zZ2sdxRaqsUz6Axb3
+Chet Baker — Look For The Silver Lining | https://open.spotify.com/track/67ibXkmavZoN2S6m86p70f
+Chet Baker — The Touch of Your Lips | https://open.spotify.com/track/7sWxZVgn80i7Uq4l6oUcj5
+Nick Drake — Pink Moon | https://open.spotify.com/track/4KROoGIaPaR1pBHPnR3bwC
+Bill Evans Trio — Blue In Green | https://open.spotify.com/track/60p18YXhrzLNrAaUXL8Bu6
+Ryo Fukui — Mellow Dream | https://open.spotify.com/track/2cQrbcxB8LsvK33s7lTqdp
+Steely Dan — Deacon Blues | https://open.spotify.com/track/0xeBC6N81ZBYDtxuBFGSuO
+Mulatu Astatke — Tezeta | https://open.spotify.com/track/7JPNvoMjoIXkTDAMx9Aajj
+Jalen Ngonda — Come Around and Love Me | https://open.spotify.com/track/5FFSlcb55C7pIFcOYapN1b

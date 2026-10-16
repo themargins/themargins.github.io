@@ -1,7 +1,7 @@
 SRC := $(wildcard content/*.md)
 OUT := $(patsubst content/%.md,writing/%.html,$(SRC))
 
-all: $(OUT) home gallery projects
+all: $(OUT) home gallery projects music
 
 # Always rebuilt (it's quick), so no page is left on an old template
 writing/%.html: content/%.md templates/post.html FORCE
@@ -20,11 +20,15 @@ gallery:
 projects:
 	python3 build_projects.py
 
+# Rebuild the music section of the home page from music.md and music.txt
+music:
+	python3 build_music.py
+
 serve:
 	python3 -m http.server 8000
 
 clean:
 	rm -f $(OUT)
 
-.PHONY: all home gallery projects serve clean FORCE
+.PHONY: all home gallery projects music serve clean FORCE
 FORCE:

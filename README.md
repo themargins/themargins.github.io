@@ -2,6 +2,28 @@
 
 Personal site. Static, no framework. Needs `pandoc`, `python3` and `make`.
 
+## The home page
+
+The intro at the top comes from `home.md`: edit it and run `make`. Below it,
+"Lately" lists the newest six things across Writing, Projects and the Gallery
+(gallery pieces need a date in their file name to appear there).
+
+## Music
+
+The home page has a music section, "On repeat": a few words (from `music.md`),
+your songs, and a small "Recommend me a song" form.
+
+Songs live in `music.txt`, newest at the top, one per line as `Artist — Song`.
+Put an optional note on the next line, indented. Add `| <link>` after a song
+to choose where it links (otherwise Apple Music). Run `make`: the first time a
+song appears, its cover, year and 30-second preview (tap the cover to play) are
+looked up and saved in `music/`, so later builds don't need the internet. If it
+picks the wrong song, delete its entry in `music/songs.json` and run `make` again.
+
+Recommendations go wherever `recommend_to:` in `music.md` says: your email
+address (the visitor's email app opens, addressed to you) or a form service
+address like `https://formspree.io/f/...`. Leave it empty to hide the form.
+
 ## Writing a piece
 
 1. Add `content/your_title.md` with frontmatter:
@@ -17,8 +39,8 @@ Personal site. Static, no framework. Needs `pandoc`, `python3` and `make`.
 
    Add `draft: true` to keep it off the site's lists while you work on it.
 
-2. Run `make`. Each `content/*.md` becomes `writing/*.html`, and the lists on the
-   home page and on `/writing/` are rebuilt from the dates, newest first.
+2. Run `make`. Each `content/*.md` becomes `writing/*.html`, and the lists on
+   `/writing/` and the home page are rebuilt from the dates, newest first.
 
 For poems, start each line with `| ` to keep the line breaks.
 

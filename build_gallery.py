@@ -139,7 +139,7 @@ for date, path, title, dims, caption in dated + undated:
     head = f'<div class="plate-head">{"".join(meta)}</div>' if meta else ""
     figcaption = f"\n            <figcaption>{head}{caption}</figcaption>" if (head or caption) else ""
     blocks.append(
-        f'          <figure class="plate">\n'
+        f'          <figure class="plate" id="{html.escape(path.stem, quote=True)}">\n'
         f'            <a href="{src}"><img src="{src}" alt="{alt}"{size} loading="lazy" decoding="async"></a>'
         f"{figcaption}\n"
         f"          </figure>"
