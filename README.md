@@ -24,6 +24,24 @@ Recommendations go wherever `recommend_to:` in `music.md` says: your email
 address (the visitor's email app opens, addressed to you) or a form service
 address like `https://formspree.io/f/...`. Leave it empty to hide the form.
 
+## Books
+
+The home page has a books section, "On the shelf". Books live in `books.txt`,
+one per line as `Author — Title`, in the order you want them shown. Put an
+optional note on the next line, indented; `[links](/writing/x.html)` work there.
+Add `| <link>` after a book to choose where its title links (otherwise Open Library).
+Start a line with `now:` for what you're reading at the moment: it moves to the front
+with a small "Reading now" label. Delete the `now:` when you finish it.
+The first 9 books sit on the shelf; any more fold away under an "All N books" link
+(change `SHOWN` in `build_books.py` for a different number).
+Lines starting with `early:` are the books you grew up on: they appear as one line of
+text under the shelf, "Where it started: …", with no covers.
+Run `make`: the first time a book appears, its cover is looked up on
+Open Library and saved in `books/covers/`. If no cover is found, `make` leaves a grey
+placeholder there named after the book (e.g. `books/covers/albert-camus-the-stranger.png`):
+save the right image over it with the same name and run `make` again. To replace a wrong
+cover, save your own image as that same `.png` name; it wins over the downloaded one.
+
 ## Writing a piece
 
 1. Add `content/your_title.md` with frontmatter:
@@ -52,10 +70,14 @@ Inside a paragraph, write `<span class="marginnote">A side remark.</span>`. On w
 
 1. Drop an image into `art/images/`, named with the date and a title:
    `2026-10-07-morning-light.jpg` shows as *Morning light*, Oct 7, 2026.
-   The date is optional; it sets the order, newest first.
+   The date is optional; it's shown under the title.
 2. Optional caption: a text file with the same name,
    `2026-10-07-morning-light.txt`. A blank line starts a new paragraph.
 3. Run `make`.
+
+The Gallery shows pieces newest upload first. `art/uploaded.txt` remembers the order
+they were added (`make` adds new ones itself); move a line there to change where a
+piece sits.
 
 Use .jpg, .png, .gif or .webp. Photos straight from an iPhone (.heic) are fine:
 `make` turns each one into a .jpg of the same name, 2000px on the long side, with

@@ -1,0 +1,6 @@
+# Gallery pieces in the order they were added, oldest first.
+# The Gallery shows them newest first. `make` adds new pieces here;
+# move a line to change where a piece sits.
+Blue_Distance.jpg
+He_Still_Sees_Goliath.jpg
+Fortitude.jpg

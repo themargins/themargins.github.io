@@ -63,7 +63,7 @@
 <li><strong>Late August.</strong> The first version was a single-page browser app with a navy-and-amber logbook look.</li>
 <li><strong>Soon after.</strong> I moved it to Telegram: push notifications for free, nothing to install, and replying is as easy as texting. The browser app was dropped.</li>
 <li><strong>September.</strong> It ran on my laptop until I noticed that closing the lid killed the pings. It moved to a small cloud server (about $7 a month), running as a service that restarts itself after crashes and reboots.</li>
-<li><strong>September to October.</strong> A long run of bugs that all looked the same from the outside: <em>the pings stopped.</em></li>
+<li><strong>September to October.</strong> A long run of bugs that all looked the same from the outside…the pings stopped.</li>
 <li><strong>Early October.</strong> A friend started using it, and their confusion reshaped the onboarding.</li>
 <li><strong>October.</strong> Better sleep handling, a debug mode, a tidier chat, and an “away mode” for long silences.</li>
 </ul>
@@ -76,9 +76,8 @@
 <p><strong>The laptop lid.</strong> A tracker that sleeps when your laptop sleeps is not a tracker. That is the whole reason it lives on a server, and why free hosting tiers that put idle apps to sleep were never an option: they would have recreated the same problem.</p>
 <p><strong>The default that never changed.</strong> I changed the default categories in code, but new users kept getting the old ones. The database had stored the default when the table was first created. <em>Defaults belong in code, not in the schema.</em></p>
 <p><strong>Sleep logged as zero minutes.</strong> <code>/sleep</code> used to log an entry straight away, so every night came out roughly zero minutes long. Now it just marks bedtime, and my first answer after waking closes the entry, so the night gets its full length. A night longer than 12 hours isn’t believable; it means I missed the wake ping, and the extra time counts as untracked.</p>
-<p><strong>Being honest about gaps.</strong> If I didn’t answer for half a day, the bot used to hand all of it to whatever I tapped next. Now each answer covers a capped amount of time, and the rest shows up separately as <strong>Untracked</strong>, outside the category totals. After three missed pings in a row it goes into away mode and nudges less and less often, every 3 hours, then 12, then 24, before pausing. I’d rather have a hole in the data than a lie in it.</p>
+<p><strong>Handling larger gaps.</strong> If I didn’t answer for half a day, the bot used to hand all of it to whatever I tapped next. Now each answer covers a capped amount of time, and the rest shows up separately as <strong>Untracked</strong>, outside the category totals. After three missed pings in a row it goes into away mode and nudges less and less often, every 3 hours, then 12, then 24, before pausing. I’d rather have a hole in the data than a lie in it.</p>
 <p><strong>Chat clutter.</strong> Unanswered pings used to pile up as new messages. Now the bot edits the same message in place. That exposed a funny one: Telegram returns an error if you “edit” a message without changing anything, and the bot read that as a failure and sent duplicates.</p>
-<p><strong>I leaked my own token.</strong> I pasted a terminal log into a chat, and the log had the bot’s secret token inside the request URLs. I revoked it and made a new one. <em>Logs contain secrets.</em></p>
 <p><strong>Python 3.14 broke the Telegram library</strong> on a fresh server. The fix was to upgrade the library, not downgrade Python.</p>
 <p><strong>Testing something that pings hourly is slow.</strong> <code>/debug</code> switches to one-minute pings and short timeouts, tags every message with 🐞, and restores my usual settings when I turn it off.</p>
 <figure>

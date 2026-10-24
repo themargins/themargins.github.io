@@ -2,7 +2,10 @@
 """Rebuild the Gallery (art/index.html) from the images in art/images/.
 
 Naming:   2026-10-07-morning-light.jpg  ->  "Morning light", Oct 7, 2026
-          The date prefix is optional; it sets the order (newest first).
+          The date prefix is optional; it's shown under the title.
+Order:    newest upload first. art/uploaded.txt remembers the order pieces were
+          added (oldest at the top); `make` appends new ones itself. Move a line
+          there to change where a piece sits.
 Caption:  an optional text file with the same name, e.g.
           2026-10-07-morning-light.txt. Blank lines start a new paragraph.
 Phone photos: a .heic file is converted to a .jpg of the same name
@@ -25,6 +28,7 @@ from pathlib import Path
 START, END = "<!-- gallery:start -->", "<!-- gallery:end -->"
 IMAGES = Path("art/images")
 PAGE = Path("art/index.html")
+UPLOADED = Path("art/uploaded.txt")
 WEB_TYPES = {".jpg", ".jpeg", ".png", ".gif", ".webp", ".avif"}
 BIG_FILE = 1_500_000  # bytes; warn above this
 
@@ -122,12 +126,33 @@ for path in sorted(IMAGES.glob("*")) if IMAGES.exists() else []:
     dims = size_with_pillow(path) or (size_plain(path) if ext in (".jpg", ".jpeg", ".png", ".gif") else None)
     plates.append((date, path, title, dims, caption_html(path.with_suffix(".txt"))))
 
-# Newest first; undated images go last, by name
-dated = sorted((p for p in plates if p[0]), key=lambda p: (p[0], p[1].name), reverse=True)
-undated = sorted((p for p in plates if not p[0]), key=lambda p: p[1].name)
+# Newest upload first. art/uploaded.txt keeps the order pieces arrived in (oldest at
+# the top), so it survives copying or re-cloning the site; new pieces are added to it.
+def arrived(path):
+    """When this piece was added: the file's creation time (its .heic original's, if any)."""
+    times = []
+    for f in [path] + [path.with_suffix(s) for s in (".heic", ".HEIC", ".heif", ".HEIF")]:
+        if f.exists():
+            st = f.stat()
+            times.append(getattr(st, "st_birthtime", st.st_mtime))
+    return min(times)
+
+
+listed = [l.strip() for l in UPLOADED.read_text(encoding="utf-8").splitlines()] if UPLOADED.exists() else []
+listed = [l for l in listed if l and not l.startswith("#")]
+names = {p[1].name for p in plates}
+new = sorted((p[1] for p in plates if p[1].name not in listed), key=arrived)
+if new:
+    listed += [p.name for p in new]
+    UPLOADED.write_text("# Gallery pieces in the order they were added, oldest first.\n"
+                        "# The Gallery shows them newest first. `make` adds new pieces here;\n"
+                        "# move a line to change where a piece sits.\n" + "\n".join(listed) + "\n",
+                        encoding="utf-8")
+rank = {name: i for i, name in enumerate(listed)}
+ordered = sorted(plates, key=lambda p: rank.get(p[1].name, len(rank)), reverse=True)
 
 blocks = []
-for date, path, title, dims, caption in dated + undated:
+for date, path, title, dims, caption in ordered:
     src = "/" + path.as_posix()
     size = f' width="{dims[0]}" height="{dims[1]}"' if dims else ""
     alt = html.escape(title or "Untitled", quote=True)

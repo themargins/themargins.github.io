@@ -1,0 +1,67 @@
+# Books on the home page, under "On the shelf", in the order shown.
+#
+#     Author — Title
+#         An optional note on the next line, indented. [Links](/writing/x.html) work.
+#     Author — Title | https://...   (optional: where the title links)
+#     now: Author — Title            (what you're reading now: shown first, marked "Reading now")
+#     early: Author — Title          (childhood books: the "Where it started" line under the shelf)
+#
+# Run `make`: each book's cover is looked up on Open Library the
+# first time. Lines starting with # are ignored.
+
+now: Fyodor Dostoevsky — The Brothers Karamazov
+now: David Robson — The Expectation Effect
+Khalil Gibran — The Prophet
+    By my favorite poet, and the book behind [The Lantern Within](/writing/the_lantern_within.html).
+Paulo Coelho — The Alchemist
+Charlie Mackesy — The Boy, the Mole, the Fox and the Horse
+Hermann Hesse — Siddhartha
+Albert Camus — The Stranger
+Lois Lowry — The Giver
+Aldous Huxley — Brave New World
+Yann Martel — Life of Pi
+Blake Crouch — Dark Matter
+Blake Crouch — Recursion
+Gary Paulsen — Hatchet
+Malcolm Gladwell — Outliers
+Daniel Kahneman — Thinking, Fast and Slow
+Khaled Hosseini — The Kite Runner
+Mitch Albom — Tuesdays with Morrie
+Randy Pausch — The Last Lecture
+Mark Haddon — The Curious Incident of the Dog in the Night-Time
+Steven Pressfield — The War of Art
+Derek Sivers — How to Live
+Derek Sivers — Hell Yeah or No
+Derek Sivers — Useful Not True
+Steve Jobs — Make Something Wonderful | https://book.stevejobsarchive.com/
+Dan Brown — The Da Vinci Code
+Ernest Hemingway — The Sun Also Rises
+Douglas Adams — The Hitchhiker's Guide to the Galaxy
+S. E. Hinton — The Outsiders
+William Golding — Lord of the Flies
+John Steinbeck — Of Mice and Men
+Harper Lee — To Kill a Mockingbird
+George Orwell — Animal Farm
+George Orwell — 1984
+F. Scott Fitzgerald — The Great Gatsby
+Chinua Achebe — Things Fall Apart
+Zora Neale Hurston — Their Eyes Were Watching God
+Mark Twain — Adventures of Huckleberry Finn
+Nathaniel Hawthorne — The Scarlet Letter
+Homer — The Odyssey
+
+# Where it started: the books I grew up on
+early: Lemony Snicket — A Series of Unfortunate Events
+early: T. A. Barron — The Lost Years of Merlin
+early: T. A. Barron — Merlin's Dragon
+early: Jenny Nimmo — Charlie Bone
+early: Angie Sage — Septimus Heap
+early: Michael Buckley — The Sisters Grimm
+early: Eoin Colfer — Artemis Fowl
+early: Suzanne Collins — Gregor the Overlander
+early: every Rick Riordan series
+early: Jeff Smith — Bone
+early: John Flanagan — Ranger's Apprentice
+early: Darren Shan — Cirque du Freak
+early: Tsugumi Ohba — Death Note
+early: Trenton Lee Stewart — The Mysterious Benedict Society
