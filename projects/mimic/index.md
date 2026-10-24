@@ -12,8 +12,8 @@ draft: false
 **MIMIC** stands for *Motion Imitation via Markerless Image Capture*. I move my arm and hand in front of a depth camera, and a robot arm with a dexterous hand does the same thing.
 
 - **What:** live teleoperation of a Universal Robots UR3e arm and a Prensilia Mia Hand, driven by my own arm and hand movements.
-- **How:** an Intel RealSense D435 sees me in colour and depth. Software finds my arm and hand keypoints, lifts them into 3D, and retargets them onto the robot.
 - **Why:** markerless teleoperation is a cheap way to collect human demonstrations for robot learning, and building it end to end teaches perception, kinematics and real robot control all at once.
+- **How:** an Intel RealSense D435 sees me in colour and depth. Software finds my arm and hand keypoints, lifts them into 3D, and retargets them onto the robot.
 
 ## Why markerless
 

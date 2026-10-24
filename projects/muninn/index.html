@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Muninn | The Margins</title>
+  <meta name="description" content="A Telegram bot that asks me what I’ve been doing every so often, remembers the answer, and tells me where my time went.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <nav class="site-nav">
+      <a class="brand" href="/">The Margins</a>
+      <div class="nav-links">
+        <a href="/writing/">Writing</a>
+        <a href="/projects/">Projects</a>
+        <a href="/art/">Gallery</a>
+      </div>
+    </nav>
+
+    <main>
+      <article class="prose project">
+        <header>
+          <h1 class="post-title">Muninn</h1>
+          <p class="post-dek">A Telegram bot that asks me what I’ve been doing every so often, remembers the answer, and tells me where my time went.</p>
+          <p class="post-meta">Ongoing · Started August 2026 · Updated Oct 17, 2026</p>
+        </header>
+
+<p>In Norse mythology, Odin keeps two ravens, Huginn and Muninn: <em>thought</em> and <em>memory</em>. Every morning they fly out over the world, and every evening they come back and tell him what they saw.</p>
+<p><strong>Muninn</strong> is my version, scaled down to one person’s day. Every so often it sends me a message on Telegram asking what I’ve been doing. I tap an answer, and it remembers so I don’t have to.</p>
+<ul>
+<li><strong>What:</strong> a Telegram bot that pings me on a schedule, asks what I was doing, and builds up a picture of where my time goes.</li>
+<li><strong>Why:</strong> I wanted a clear picture of where my time goes, not where I think it goes.</li>
+<li><strong>How:</strong> one tap per ping. Durations come from the gaps between my answers, so I never start or stop a timer.</li>
+</ul>
+<h2 id="the-tracker-comes-to-you">The tracker comes to you</h2>
+<p>Most time trackers die the same death. Logging is a chore: you have to remember to open the app, start a timer, stop it, and then piece together the afternoon you forgot to record. The tracker depends on the exact discipline it was supposed to help you build.</p>
+<p>So I flipped it around. Muninn comes to me. A message arrives, I answer with one tap, and it does the arithmetic.</p>
+<p>The bigger hope is simple to say and hard to do: to see how I spend my time clearly enough to spend it better, and live a little more fully because of it. Time is the thing at the centre. Sleep, money and time with the people I love might come later.</p>
+<h2 id="how-it-works">How it works</h2>
+<ol type="1">
+<li>Every so often (a fixed interval, or a random one within a range like 30 to 90 minutes) a message arrives: <em>what were you doing?</em></li>
+<li>I tap <strong>✓ Still building</strong> (or whatever I was last doing) to carry on, or pick a category: <strong>Work, Building, Social, Break, Distraction</strong> or <strong>Other</strong>. The tap is saved right away. Anything I type in the next 30 seconds becomes the note, and <strong>Undo</strong> and <strong>Change</strong> stay on the message until then, so a wrong tap is one tap to fix.</li>
+<li>The answer covers the time since my last one, so a duration is the time between two answers, not a count of pings.</li>
+<li><code>/today</code> and <code>/week</code> reply with a small text bar chart and a one-line insight: the top category, and how much of the time went to distraction.</li>
+</ol>
+<p>A few more commands handle the edges of a day: <code>/log</code> to record something right now, <code>/sleep</code> and <code>/wakeup</code>, <code>/undo</code>, <code>/status</code>, <code>/timezone</code> (or just share your location), and a snooze button that pushes the ping back half an hour.</p>
+<figure>
+<img src="ping.png" loading="lazy" decoding="async" alt="A ping. One tap to carry on, or pick something else." />
+<figcaption aria-hidden="true">A ping. One tap to carry on, or pick something else.</figcaption>
+</figure>
+<figure>
+<video src="note-demo.mp4" autoplay muted loop playsinline aria-label="Answering a ping and adding a note." poster="note-demo.poster.jpg" width="800" height="976" style="aspect-ratio: 800 / 976; width: min(100%, calc(85vh * 800 / 976))"><a href="note-demo.mp4">Watch the video</a></video>
+<figcaption>Answering a ping and adding a note.</figcaption>
+</figure>
+<h3 id="work-is-not-building">Work is not Building</h3>
+<p>I started with ten generic categories and cut them down to six. The change that mattered most was splitting <strong>Work</strong>, time I give to someone else (the PhD), from <strong>Building</strong>, time I give to myself (projects like this one). Both look like sitting at a laptop. They are not the same thing, and once they were separate, the summaries started saying something true about my week.</p>
+<h2 id="how-it-got-here">How it got here</h2>
+<ul>
+<li><strong>Late August.</strong> The first version was a single-page browser app with a navy-and-amber logbook look.</li>
+<li><strong>Soon after.</strong> I moved it to Telegram: push notifications for free, nothing to install, and replying is as easy as texting. The browser app was dropped.</li>
+<li><strong>September.</strong> It ran on my laptop until I noticed that closing the lid killed the pings. It moved to a small cloud server (about $7 a month), running as a service that restarts itself after crashes and reboots.</li>
+<li><strong>September to October.</strong> A long run of bugs that all looked the same from the outside: <em>the pings stopped.</em></li>
+<li><strong>Early October.</strong> A friend started using it, and their confusion reshaped the onboarding.</li>
+<li><strong>October.</strong> Better sleep handling, a debug mode, a tidier chat, and an “away mode” for long silences.</li>
+</ul>
+<p>Now I use it every day, one friend tests it, and it is still very much a prototype.</p>
+<h2 id="every-bug-was-the-pings-stopped">Every bug was “the pings stopped”</h2>
+<p>A bot that pings you is only as good as its heartbeat. Most of what I learned building Muninn came from that heartbeat quietly stopping.</p>
+<p><strong>The next ping waited for my answer.</strong> The bot scheduled the next ping only after I replied. Ignore one ping and it never sent another; tracking just died. Now each ping schedules the next one the moment it fires. <em>Don’t make the system’s heartbeat depend on the user doing something.</em></p>
+<p><strong>Pings stopped for hours at a time.</strong> Sending a message occasionally failed for a moment, and that failure skipped the line that scheduled the next ping. It came back only when an unrelated restart happened to revive it. A <code>try/finally</code> now makes sure rescheduling always runs. <em>The worst bugs are the silent ones.</em></p>
+<p><strong>Restarts wiped the schedule.</strong> Scheduled jobs lived only in memory, so every deploy dropped them. The next ping time is now saved to the database and reloaded on startup.</p>
+<p><strong>The laptop lid.</strong> A tracker that sleeps when your laptop sleeps is not a tracker. That is the whole reason it lives on a server, and why free hosting tiers that put idle apps to sleep were never an option: they would have recreated the same problem.</p>
+<p><strong>The default that never changed.</strong> I changed the default categories in code, but new users kept getting the old ones. The database had stored the default when the table was first created. <em>Defaults belong in code, not in the schema.</em></p>
+<p><strong>Sleep logged as zero minutes.</strong> <code>/sleep</code> used to log an entry straight away, so every night came out roughly zero minutes long. Now it just marks bedtime, and my first answer after waking closes the entry, so the night gets its full length. A night longer than 12 hours isn’t believable; it means I missed the wake ping, and the extra time counts as untracked.</p>
+<p><strong>Being honest about gaps.</strong> If I didn’t answer for half a day, the bot used to hand all of it to whatever I tapped next. Now each answer covers a capped amount of time, and the rest shows up separately as <strong>Untracked</strong>, outside the category totals. After three missed pings in a row it goes into away mode and nudges less and less often, every 3 hours, then 12, then 24, before pausing. I’d rather have a hole in the data than a lie in it.</p>
+<p><strong>Chat clutter.</strong> Unanswered pings used to pile up as new messages. Now the bot edits the same message in place. That exposed a funny one: Telegram returns an error if you “edit” a message without changing anything, and the bot read that as a failure and sent duplicates.</p>
+<p><strong>I leaked my own token.</strong> I pasted a terminal log into a chat, and the log had the bot’s secret token inside the request URLs. I revoked it and made a new one. <em>Logs contain secrets.</em></p>
+<p><strong>Python 3.14 broke the Telegram library</strong> on a fresh server. The fix was to upgrade the library, not downgrade Python.</p>
+<p><strong>Testing something that pings hourly is slow.</strong> <code>/debug</code> switches to one-minute pings and short timeouts, tags every message with 🐞, and restores my usual settings when I turn it off.</p>
+<figure>
+<img src="debug.png" loading="lazy" decoding="async" alt="Debug mode, for when an hour is too long to wait." />
+<figcaption aria-hidden="true">Debug mode, for when an hour is too long to wait.</figcaption>
+</figure>
+<h2 id="what-it-taught-me-about-my-time">What it taught me about my time</h2>
+<p>Mostly, that I dilly-dally. A lot of my day drifts away in small, forgettable pieces, none of which I would ever have written down myself. Seen together at the end of a week, they add up to more than I’d like to admit.</p>
+<p>The other lesson is the hopeful one. When I really focus, I can get a lot done in very small blocks of time. The blocks don’t need to be long. They just need my full attention.</p>
+<figure>
+<img src="week.png" loading="lazy" decoding="async" alt="A week of answers. The hourglass is the time I didn’t account for." />
+<figcaption aria-hidden="true">A week of answers. The hourglass is the time I didn’t account for.</figcaption>
+</figure>
+<h2 id="what-a-second-user-taught-me">What a second user taught me</h2>
+<p>My friend set an interval but never switched tracking on, then waited for pings that were never going to come. That became <code>/status</code>.</p>
+<figure>
+<img src="status.png" loading="lazy" decoding="async" alt="/status: one place to check that it’s running." />
+<figcaption aria-hidden="true">/status: one place to check that it’s running.</figcaption>
+</figure>
+<p>They typed their timezone in lowercase, the way anyone would, and the bot rejected it. Now it doesn’t care about capitals.</p>
+<figure>
+<img src="welcome.png" loading="lazy" decoding="async" alt="The welcome message now says it up front: nothing happens until you run /track." />
+<figcaption aria-hidden="true">The welcome message now says it up front: nothing happens until you run /track.</figcaption>
+</figure>
+<p>Small things like that are where people give up on something without ever saying why. And I couldn’t see any of them, because I already knew how everything worked. You can’t see your own onboarding.</p>
+<h2 id="whats-next">What’s next</h2>
+<ul>
+<li>Maybe your phone’s Screen Time as an extra signal.</li>
+<li>Reusing the scheduling and storage underneath for other “ping me and remember” ideas.</li>
+<li>Maybe, one day, something other people could rely on. That would need proper protection for each person’s data first.</li>
+</ul>
+<h2 id="stack">Stack</h2>
+<p>Python, <code>python-telegram-bot</code> and SQLite: about 1,500 lines in a single file, running as a systemd service on one small Hetzner server, with a one-command deploy.</p>
+<h2 id="updates">Updates</h2>
+<p><strong>Oct 17, 2026.</strong> Started this page.</p>
+      </article>
+      <p class="back"><a href="/projects/">All projects</a></p>
+    </main>
+
+    <footer class="site-footer">
+      <p>&copy; 2026 The Margins · Write me <a href="mailto:hereinthemargins@gmail.com">hereinthemargins@gmail.com</a></p>
+    </footer>
+  </div>
+</body>
+</html>

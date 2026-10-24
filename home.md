@@ -17,5 +17,3 @@ Keep it short: a visitor should get a sense of you in ten seconds.
 ::: todo
 **What's here.** Optional, one line, e.g. "Here you'll find essays and poems, the things I'm building, and some paintings."
 :::
-
-[hereinthemargins@gmail.com](mailto:hereinthemargins@gmail.com).
