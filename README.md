@@ -11,7 +11,7 @@ The intro at the top comes from `home.md`: edit it and run `make`. Below it,
 ## Music
 
 The home page has a music section, "On repeat": a few words (from `music.md`),
-your songs, and a small "Recommend me a song" form.
+your songs, and a small "Recommend a song" form.
 
 Songs live in `music.txt`, newest at the top, one per line as `Artist — Song`.
 Put an optional note on the next line, indented. Add `| <link>` after a song

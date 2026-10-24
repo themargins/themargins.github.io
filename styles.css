@@ -295,7 +295,7 @@ button.song-art:focus-visible .song-play,
 
 .prose .music-intro p { margin-bottom: 0.8em; }
 
-/* Recommend me a song: a small link that opens the form */
+/* Recommend a song: a small link that opens the form */
 
 .recommend { margin-top: 1rem; font-size: var(--step--1); }
 

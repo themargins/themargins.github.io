@@ -219,7 +219,7 @@ if to:
         '\n            <input type="hidden" name="_subject" value="A song recommendation from The Margins">'
         '\n            <input type="text" name="_gotcha" class="trap" tabindex="-1" autocomplete="off" aria-hidden="true">')
     box = f'''        <details class="recommend">
-          <summary>Recommend me a song</summary>
+          <summary>Recommend a song</summary>
           <form {attrs}>{extras}
             <div class="recommend-row">
               <label><span>Song</span><input name="song" required autocomplete="off"></label>
